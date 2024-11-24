@@ -12,20 +12,33 @@ const getAllProductsFromDB = async () => {
   return result;
 };
 // Get Single Product From DB
-const getSingleProductFromDB = async (id: string) => {
+const getSingleProductFromDB = async (productId: string) => {
   const result = await Product.aggregate([
-    { $match: { productID: id, isDeleted: false } },
+    { $match: { productID: productId, isDeleted: false } },
   ]);
   return result;
 };
 // Update Product From DB
-const updateProductFromDB = async (id: string) => {
-  console.log(id);
-  return ;
+const updateProductFromDB = async (
+  productId: string,
+  updateData: TypeOfProduct,
+) => {
+  const result = await Product.findByIdAndUpdate(
+    productId,
+    { $set: updateData },
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
+  return result;
 };
 // Delete Product From DB
 const deleteProductFromDB = async (id: string) => {
-  const result = await Product.updateOne({ id }, { isDeleted: true });
+  const result = await Product.updateOne(
+    { productID: id },
+    { isDeleted: true },
+  );
   return result;
 };
 
