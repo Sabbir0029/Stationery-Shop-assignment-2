@@ -4,11 +4,6 @@ import { TypeOfProduct } from './Product.interface';
 // Define the schema for the stationery product
 const productSchema = new Schema<TypeOfProduct>(
   {
-    productID: {
-      type: String,
-      unique: true,
-      trim: true,
-    },
     name: {
       type: String,
       required: [true, 'name is required'],
