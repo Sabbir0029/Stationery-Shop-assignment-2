@@ -13,9 +13,7 @@ const getAllProductsFromDB = async () => {
 };
 // Get Single Product From DB
 const getSingleProductFromDB = async (productId: string) => {
-  const result = await Product.aggregate([
-    { $match: { productID: productId, isDeleted: false } },
-  ]);
+  const result = await Product.findById(productId);
   return result;
 };
 // Update Product From DB
@@ -34,9 +32,9 @@ const updateProductFromDB = async (
   return result;
 };
 // Delete Product From DB
-const deleteProductFromDB = async (id: string) => {
+const deleteProductFromDB = async (productId: string) => {
   const result = await Product.updateOne(
-    { productID: id },
+    { productId },
     { isDeleted: true },
   );
   return result;

@@ -65,10 +65,9 @@ const getSingleProduct = async (req: Request, res: Response) => {
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const updateData = req.body;
     const result = await ProductServices.updateProductFromDB(
       productId,
-      updateData,
+      req.body,
     );
 
     res.status(200).json({
@@ -89,8 +88,8 @@ const updateProduct = async (req: Request, res: Response) => {
 // Delete Product
 const deleteProduct = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const result = await ProductServices.deleteProductFromDB(id);
+    const { productId } = req.params;
+    const result = await ProductServices.deleteProductFromDB(productId);
 
     res.status(200).json({
       success: true,
